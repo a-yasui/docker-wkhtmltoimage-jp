@@ -182,12 +182,12 @@ COPY --from=builder /bin/wkhtmltoimage /bin/wkhtmltoimage
 WORKDIR /root
 
 # IPA font
-RUN cd && wget https://ipafont.ipa.go.jp/IPAfont/IPAfont00303.zip \
-    && unzip IPAfont00303.zip \
+COPY IPAexfont00401.zip ./IPAexfont00401.zip
+RUN cd && unzip IPAexfont00401.zip \
     && mkdir -p /usr/share/fonts/ipa \
-    && cp IPAfont00303/* /usr/share/fonts/ipa/ \
+    && cp IPAexfont00401/* /usr/share/fonts/ipa/ \
     && fc-cache -fv \
-    && rm -rf IPAFont00303 IPAfont00303.zip
+    && rm -rf IPAexfont00401 IPAexfont00401.zip
 
 # 2: Set wkhtmltopdf as the entrypoint:
 COPY alpine-entrypoint.sh /bin/entrypoint.sh
